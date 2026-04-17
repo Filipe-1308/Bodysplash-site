@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Splash</title>
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}body {
+  background: linear-gradient(135deg, #8b0000, #ff4d6d);
+  color: white;
+}
+
+header {
+  padding: 20px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.banner {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+}
+
+.banner h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.banner p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: white;
+  color: #8b0000;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #ffd6dc;
+}
+
+.produtos {
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+  </style>
+</head>
+<body><header>BODY SPLASH</header><section class="banner">
+  <h1>Sinta o Frescor</h1>
+  <p>Fragrâncias leves, intensas e irresistíveis</p>
+  <button class="btn">Comprar Agora</button>
+</section><section class="produtos">
+  <div class="card">
+    <img src="https://via.placeholder.com/200x250" alt="Produto">
+    <h3>Cherry Splash</h3>
+    <p>Doce e marcante</p>
+  </div>  <div class="card">
+    <img src="https://via.placeholder.com/200x250" alt="Produto">
+    <h3>Rose Glow</h3>
+    <p>Elegante e suave</p>
+  </div>  <div class="card">
+    <img src="https://via.placeholder.com/200x250" alt="Produto">
+    <h3>Berry Fire</h3>
+    <p>Intenso e vibrante</p>
+  </div>
+</section><footer>
+  © 2026 Body Splash - Todos os direitos reservados
+</footer></body>
+</html>
