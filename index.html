@@ -1,143 +1,139 @@
 <!DOCTYPE html><html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auracandy</title>  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">  <style>
-    * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auracandy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:linear-gradient(180deg,#1a0006,#7a001f);color:#fff}
 
-    body {
-      background: radial-gradient(circle at top, #ff4d6d, #8b0000);
-      color: white;
-      overflow-x: hidden;
-    }
+header{text-align:center;padding:20px;font-weight:700;letter-spacing:4px}
 
-    header {
-      padding: 20px;
-      text-align: center;
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: 3px;
-    }
+.banner{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.banner h1{font-size:52px}
+.banner p{opacity:.8;margin-top:10px}
 
-    .banner {
-      height: 85vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      position: relative;
-    }
+.luxo{font-size:14px;opacity:.6;margin-bottom:10px}
 
-    .banner h1 {
-      font-size: 52px;
-      text-shadow: 0 0 20px rgba(255,255,255,0.4);
-    }
+.produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px;padding:40px}
 
-    .banner p {
-      font-size: 18px;
-      margin-top: 10px;
-      opacity: 0.9;
-    }
+.card{
+background:rgba(255,255,255,0.05);
+padding:20px;border-radius:20px;
+text-align:center;
+transition:.4s;
+position:relative;
+overflow:hidden
+}
 
-    .btn {
-      margin-top: 25px;
-      padding: 14px 30px;
-      background: linear-gradient(45deg, #fff, #ffd6dc);
-      color: #8b0000;
-      border: none;
-      border-radius: 40px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-      text-decoration: none;
-    }
+.card::before{
+content:'';
+position:absolute;
+width:200%;height:200%;
+background:radial-gradient(circle,rgba(255,255,255,0.2),transparent);
+top:-50%;left:-50%;opacity:0;
+transition:.5s
+}
 
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255,255,255,0.6);
-    }
+.card:hover::before{opacity:1}
+.card:hover{transform:translateY(-10px) scale(1.03)}
 
-    .glow {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: rgba(255,255,255,0.1);
-      filter: blur(80px);
-      border-radius: 50%;
-      animation: float 6s infinite alternate ease-in-out;
-    }
+.card img{width:100%;border-radius:15px;margin-bottom:10px}
 
-    .glow:nth-child(1) {top:10%; left:20%;}
-    .glow:nth-child(2) {bottom:10%; right:20%;}
+.price{font-weight:700;margin:10px 0;color:#ffd6dc}
 
-    @keyframes float {
-      from {transform: translateY(0px);}
-      to {transform: translateY(-30px);}
-    }
+.add-btn{
+padding:10px 20px;border:none;border-radius:20px;
+background:linear-gradient(45deg,#fff,#ffd6dc);
+color:#7a001f;font-weight:600;cursor:pointer
+}
 
-    .produtos {
-      padding: 50px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
-    }
+.badge{
+position:absolute;top:15px;left:15px;
+background:#ffd6dc;color:#7a001f;
+padding:5px 10px;border-radius:15px;font-size:12px
+}
 
-    .card {
-      background: rgba(255,255,255,0.08);
-      padding: 20px;
-      border-radius: 25px;
-      text-align: center;
-      backdrop-filter: blur(15px);
-      transition: 0.3s;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
+.cart-icon{position:fixed;top:20px;right:20px;background:#000a;padding:10px 15px;border-radius:20px;cursor:pointer}
+.cart-box{position:fixed;top:70px;right:20px;width:280px;background:#111;padding:15px;border-radius:15px;display:none}
+.cart-item{font-size:14px;margin-bottom:5px;display:flex;justify-content:space-between}
+.remove{cursor:pointer;color:#ff4d6d}
+.total{margin-top:10px;font-weight:700}
 
-    .card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 0 30px rgba(255,255,255,0.3);
-    }
+.btn-finalizar{margin-top:10px;width:100%;padding:10px;border:none;border-radius:20px;background:#25D366;color:#fff;font-weight:600;cursor:pointer}
 
-    .card img {
-      width: 100%;
-      border-radius: 15px;
-      margin-bottom: 10px;
-    }
+.whatsapp{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center}
+.whatsapp img{width:30px}
 
-    .card h3 {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
+footer{text-align:center;padding:20px;font-size:14px;opacity:.7}
+</style></head>
+<body><header>AURACANDY</header><div class="cart-icon" onclick="toggleCart()">🛒 <span id="count">0</span></div><div class="cart-box" id="cartBox">
+<h3>Carrinho</h3>
+<div id="cartItems"></div>
+<div class="total" id="total"></div>
+<button class="btn-finalizar" onclick="checkout()">Finalizar no WhatsApp</button>
+</div><section class="banner">
+<p class="luxo">✨ Edição limitada • Alta fixação</p>
+<h1>Sinta sua Aura</h1>
+<p>Doce. Intensa. Inesquecível.</p>
+</section><section class="produtos"><div class="card">
+<div class="badge">Mais vendido</div>
+<img src="cherry.jpg">
+<h3>Cherry Aura</h3>
+<p>Uma explosão doce que marca presença</p>
+<div class="price">R$ 39,90</div>
+<button class="add-btn" onclick="add('Cherry Aura',39.9)">Adicionar</button>
+</div><div class="card">
+<div class="badge">Luxo</div>
+<img src="rose.jpg">
+<h3>Rose Candy</h3>
+<p>Elegância suave com toque sedutor</p>
+<div class="price">R$ 44,90</div>
+<button class="add-btn" onclick="add('Rose Candy',44.9)">Adicionar</button>
+</div><div class="card">
+<div class="badge">Intenso</div>
+<img src="berry.jpg">
+<h3>Berry Fire</h3>
+<p>Fragrância marcante e irresistível</p>
+<div class="price">R$ 49,90</div>
+<button class="add-btn" onclick="add('Berry Fire',49.9)">Adicionar</button>
+</div></section><a href="https://wa.me/5551982992241" class="whatsapp">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a><footer>
+📱 WhatsApp: +55 51 98299-2241<br>
+© 2026 Auracandy
+</footer><script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
-  </style></head>
-<body><header>AURACANDY</header><section class="banner">
-  <div class="glow"></div>
-  <div class="glow"></div>  <h1>Sinta sua Aura</h1>
-  <p>Doce, intensa e impossível de ignorar</p>
-  <a href="https://wa.me/5551982992241" class="btn">Comprar Agora</a>
-</section><section class="produtos">
-  <div class="card">
-    <img src="https://via.placeholder.com/300x350" alt="Produto">
-    <h3>Cherry Aura</h3>
-    <p>Doce e viciante</p>
-  </div>  <div class="card">
-    <img src="https://via.placeholder.com/300x350" alt="Produto">
-    <h3>Rose Candy</h3>
-    <p>Elegante e sedutora</p>
-  </div>  <div class="card">
-    <img src="https://via.placeholder.com/300x350" alt="Produto">
-    <h3>Berry Fire</h3>
-    <p>Intenso e marcante</p>
-  </div>
-</section><footer>
-  <p>📱 WhatsApp: +55 51 98299-2241</p>
-  <p>© 2026 Auracandy - Todos os direitos reservados</p>
-</footer></body>
+function updateCart(){
+ document.getElementById('count').innerText = cart.length;
+ let box = document.getElementById('cartItems');
+ let total = 0;
+ box.innerHTML='';
+ cart.forEach((i,index)=>{
+  total += i.price;
+  box.innerHTML += `<div class='cart-item'>${i.name} R$ ${i.price} <span class='remove' onclick='removeItem(${index})'>x</span></div>`;
+ });
+ document.getElementById('total').innerText = 'Total: R$ ' + total.toFixed(2);
+ localStorage.setItem('cart',JSON.stringify(cart));
+}
+
+function add(name,price){cart.push({name,price});updateCart();}
+function removeItem(i){cart.splice(i,1);updateCart();}
+
+function toggleCart(){
+ let box = document.getElementById('cartBox');
+ box.style.display = box.style.display==='block'?'none':'block';
+}
+
+function checkout(){
+ let msg = 'Quero comprar:%0A';
+ let total = 0;
+ cart.forEach(i=>{msg += `- ${i.name} R$ ${i.price}%0A`; total+=i.price});
+ msg += `%0ATotal: R$ ${total.toFixed(2)}`;
+ window.open(`https://wa.me/5551982992241?text=${msg}`);
+}
+
+updateCart();
+</script></body>
 </html>
