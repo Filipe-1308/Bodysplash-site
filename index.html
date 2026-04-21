@@ -5,222 +5,97 @@
 <title>Auracandy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"><style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:linear-gradient(180deg,#1a0006,#7a001f);color:#fff}
+body{background:linear-gradient(180deg,#120004,#7a001f);color:#fff}
 
 header{text-align:center;padding:20px;font-weight:700;letter-spacing:4px}
 
-.banner{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.banner h1{font-size:52px}
-.banner p{opacity:.8;margin-top:10px}
+.cart{position:fixed;top:20px;right:20px;background:#000a;padding:10px 15px;border-radius:20px;z-index:1000}
 
-.luxo{font-size:14px;opacity:.6;margin-bottom:10px}
+.produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:30px}
 
-.produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px;padding:40px}
+.card{background:#ffffff10;padding:20px;border-radius:20px;text-align:center;cursor:pointer;transition:.3s}
+.card:hover{transform:scale(1.05)}
 
-.card{
-background:rgba(255,255,255,0.05);
-padding:20px;border-radius:20px;
-text-align:center;
-transition:.4s;
-position:relative;
-overflow:hidden
-}
+.price{margin:10px 0;font-weight:600}
 
-.card::before{
-content:'';
-position:absolute;
-width:200%;height:200%;
-background:radial-gradient(circle,rgba(255,255,255,0.2),transparent);
-top:-50%;left:-50%;opacity:0;
-transition:.5s
-}
+.add-btn{padding:10px;border:none;border-radius:20px;background:#fff;color:#7a001f;cursor:pointer}
 
-.card:hover::before{opacity:1}
-.card:hover{transform:translateY(-10px) scale(1.03);cursor:pointer}
-
-.card img{width:100%;border-radius:15px;margin-bottom:10px}
-
-.price{font-weight:700;margin:10px 0;color:#ffd6dc}
-
-.add-btn{
-padding:10px 20px;border:none;border-radius:20px;
-background:linear-gradient(45deg,#fff,#ffd6dc);
-color:#7a001f;font-weight:600;cursor:pointer
-}
-
-.badge{
-position:absolute;top:15px;left:15px;
-background:#ffd6dc;color:#7a001f;
-padding:5px 10px;border-radius:15px;font-size:12px
-}
-
-.cart-icon{position:fixed;top:20px;right:20px;background:#000a;padding:10px 15px;border-radius:20px;cursor:pointer}
-.cart-box{position:fixed;top:70px;right:20px;width:280px;background:#111;padding:15px;border-radius:15px;display:none}
-.cart-item{font-size:14px;margin-bottom:5px;display:flex;justify-content:space-between}
-.remove{cursor:pointer;color:#ff4d6d}
-.total{margin-top:10px;font-weight:700}
-
-.btn-finalizar{margin-top:10px;width:100%;padding:10px;border:none;border-radius:20px;background:#25D366;color:#fff;font-weight:600;cursor:pointer}
-
-.whatsapp{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center}
-.whatsapp img{width:30px}
-
-footer{text-align:center;padding:20px;font-size:14px;opacity:.7}
-
-
+/* MODAL */
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:#000c;display:none;align-items:center;justify-content:center;z-index:2000}
 .modal.show{display:flex}
-.modal-content{background:#111;padding:20px;border-radius:15px;width:80%;max-width:400px;text-align:center;animation:fadeInUp .35s ease}
-.close{cursor:pointer;color:#ff4d6d;margin-top:10px}
 
-@keyframes fadeInUp{
-  from{opacity:0;transform:translateY(30px) scale(.95)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
+.modal-box{background:#111;padding:20px;border-radius:20px;width:85%;max-width:400px;text-align:center;animation:fade .3s}
 
-.buy-now{margin-top:10px;width:100%;padding:10px;border:none;border-radius:20px;background:linear-gradient(45deg,#ffd6dc,#fff);color:#7a001f;font-weight:700;cursor:pointer}
-.modal-content{background:#111;padding:20px;border-radius:15px;width:80%;max-width:400px;text-align:center}
-.close{cursor:pointer;color:#ff4d6d;margin-top:10px}
+.modal-box img{width:100%;border-radius:15px;margin-bottom:10px}
 
+@keyframes fade{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+
+.btn{margin-top:10px;padding:12px;width:100%;border:none;border-radius:25px;font-weight:600;cursor:pointer}
+.buy{background:#25D366;color:#fff}
+
+.total-box{margin-top:10px;font-size:14px}
 </style></head>
-<body><header>AURACANDY</header><div class="cart-icon" onclick="toggleCart()">🛒 <span id="count">0</span></div><div class="cart-box" id="cartBox">
-<h3>Carrinho</h3>
-<div id="cartItems"></div>
-<div class="total" id="total"></div>
-<button class="btn-finalizar" onclick="checkout()">Finalizar no WhatsApp</button>
-</div><section class="banner">
-<p class="luxo">✨ Edição limitada • Alta fixação</p>
-<h1>Sinta sua Aura</h1>
-<p>Doce. Intensa. Inesquecível.</p>
-</section><section class="produtos"><h1 style="grid-column:1/-1; text-align:center; font-size:40px; margin-bottom:10px;">✨ EDIÇÃO LIMITADA ✨</h1><div class="card">
-<div class="badge">Mais vendido</div>
-<img src="cuide_se_bem_colonia_body_splash_da_perfumaria_o_boticario_338_1_6dffd4441a92ac72742e33855bfb3d18.jpg">
+<body><header>AURACANDY</header><div class="cart">🛒 <span id="count">0</span> | Total: R$ <span id="total">0.00</span></div><section class="produtos"><div class="card" onclick="openModal('Cherry Aura','Doce marcante e envolvente',39.9,'cherry.jpg')">
+<img src="cherry.jpg">
 <h3>Cherry Aura</h3>
-<p>Uma explosão doce que marca presença</p>
 <div class="price">R$ 39,90</div>
-<button class="add-btn" onclick="add('Cherry Aura',39.9)">Adicionar</button>
-</div><div class="card">
-<div class="badge">Luxo</div>
-<img src="cuide_se_bem_colonia_body_splash_da_perfumaria_o_boticario_338_1_6dffd4441a92ac72742e33855bfb3d18.jpg">
+<button class="add-btn" onclick="event.stopPropagation();add('Cherry Aura',39.9)">Adicionar</button>
+</div><div class="card" onclick="openModal('Rose Candy','Elegante e sedutora',44.9,'rose.jpg')">
+<img src="rose.jpg">
 <h3>Rose Candy</h3>
-<p>Elegância suave com toque sedutor</p>
 <div class="price">R$ 44,90</div>
-<button class="add-btn" onclick="add('Rose Candy',44.9)">Adicionar</button>
-</div><div class="card">
-<div class="badge">Intenso</div>
-<img src="cuide_se_bem_colonia_body_splash_da_perfumaria_o_boticario_338_1_6dffd4441a92ac72742e33855bfb3d18.jpg">
+<button class="add-btn" onclick="event.stopPropagation();add('Rose Candy',44.9)">Adicionar</button>
+</div><div class="card" onclick="openModal('Berry Fire','Intenso e marcante',49.9,'berry.jpg')">
+<img src="berry.jpg">
 <h3>Berry Fire</h3>
-<p>Fragrância marcante e irresistível</p>
 <div class="price">R$ 49,90</div>
-<button class="add-btn" onclick="add('Berry Fire',49.9)">Adicionar</button>
-</div><div class="card">
-<div class="badge">Novo</div>
-<img src="cuide_se_bem_colonia_body_splash_da_perfumaria_o_boticario_338_1_6dffd4441a92ac72742e33855bfb3d18.jpg">
-<h3>Vanilla Glow</h3>
-<p>Doce quente com toque sofisticado</p>
-<div class="price">R$ 42,90</div>
-<button class="add-btn" onclick="add('Vanilla Glow',42.9)">Adicionar</button>
-</div><h1 style="grid-column:1/-1; text-align:center; font-size:40px; margin:40px 0 10px; letter-spacing:2px;">✨ BODYSPLASH ✨</h1><div class="card">
-<img src="cuide_se_bem_colonia_body_splash_da_perfumaria_o_boticario_338_1_6dffd4441a92ac72742e33855bfb3d18.jpg">
-<h3>Sweet Bloom</h3>
-<p>Floral doce e delicado</p>
-<div class="price">R$ 37,90</div>
-<button class="add-btn" onclick="add('Sweet Bloom',37.9)">Adicionar</button>
-</div><div class="card">
-<img src="cuide_se_bem_colonia_body_splash_da_perfumaria_o_boticario_338_1_6dffd4441a92ac72742e33855bfb3d18.jpg">
-<h3>Fresh Candy</h3>
-<p>Refrescante com toque doce</p>
-<div class="price">R$ 36,90</div>
-<button class="add-btn" onclick="add('Fresh Candy',36.9)">Adicionar</button>
-</div><div class="card">
-<img src="cuide_se_bem_colonia_body_splash_da_perfumaria_o_boticario_338_1_6dffd4441a92ac72742e33855bfb3d18.jpg">
-<h3>Dark Cherry</h3>
-<p>Doce intenso e misterioso</p>
-<div class="price">R$ 45,90</div>
-<button class="add-btn" onclick="add('Dark Cherry',45.9)">Adicionar</button>
-</div></section><a href="https://wa.me/556191081245" class="whatsapp">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-</a><footer>
-📱 WhatsApp: +55 51 98299-2241<br>
-© 2026 Auracandy
-</footer><script>
+<button class="add-btn" onclick="event.stopPropagation();add('Berry Fire',49.9)">Adicionar</button>
+</div></section><!-- MODAL --><div class="modal" id="modal">
+<div class="modal-box">
+<img id="modalImg">
+<h2 id="title"></h2>
+<p id="desc"></p>
+<p id="price"></p>
+<button class="btn" onclick="addCurrent()">Adicionar ao carrinho</button>
+<button class="btn buy" onclick="buyNow()">Comprar agora</button>
+<button class="btn" onclick="closeModal()">Fechar</button>
+</div>
+</div><script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let currentProduct = null;
+let current = null;
 
-function updateCart(){
- document.getElementById('count').innerText = cart.length;
- let box = document.getElementById('cartItems');
+function update(){
  let total = 0;
- box.innerHTML='';
- cart.forEach((i,index)=>{
-  total += i.price;
-  box.innerHTML += `<div class='cart-item'>${i.name} R$ ${i.price} <span class='remove' onclick='removeItem(${index})'>x</span></div>`;
- });
- document.getElementById('total').innerText = 'Total: R$ ' + total.toFixed(2);
+ cart.forEach(i=> total += i.price);
+ document.getElementById('count').innerText = cart.length;
+ document.getElementById('total').innerText = total.toFixed(2);
  localStorage.setItem('cart',JSON.stringify(cart));
 }
 
-function add(name,price){cart.push({name,price});updateCart();}
-function removeItem(i){cart.splice(i,1);updateCart();}
-
-function toggleCart(){
- let box = document.getElementById('cartBox');
- box.style.display = box.style.display==='block'?'none':'block';
+function add(name,price){
+ cart.push({name,price});
+ update();
 }
 
-function openModal(name,desc,price){
- currentProduct = {name,price};
- document.getElementById('modalTitle').innerText = name;
- document.getElementById('modalDesc').innerText = desc;
- document.getElementById('modalPrice').innerText = 'R$ '+price;
+function openModal(n,d,p,img){
+ current={name:n,price:p};
+ document.getElementById('title').innerText=n;
+ document.getElementById('desc').innerText=d;
+ document.getElementById('price').innerText='R$ '+p;
+ document.getElementById('modalImg').src=img;
  document.getElementById('modal').classList.add('show');
-};
- document.getElementById('modalTitle').innerText = name;
- document.getElementById('modalDesc').innerText = desc;
- document.getElementById('modalPrice').innerText = 'R$ '+price;
- document.getElementById('modal').style.display='flex';
 }
 
 function closeModal(){document.getElementById('modal').classList.remove('show');}
-function addFromModal(){if(currentProduct){add(currentProduct.name,currentProduct.price);closeModal();}}
 
-function checkout(){
- let msg = 'Quero comprar:%0A';
- let total = 0;
- cart.forEach(i=>{msg += `- ${i.name} R$ ${i.price}%0A`; total+=i.price});
- msg += `%0ATotal: R$ ${total.toFixed(2)}`;
- window.open(`https://wa.me/556191081245?text=${msg}`);
-}
+function addCurrent(){ if(current) add(current.name,current.price); }
 
 function buyNow(){
- if(!currentProduct) return;
- let msg = `Quero comprar:%0A- ${currentProduct.name} R$ ${currentProduct.price}`;
- window.open(`https://wa.me/556191081245?text=${msg}`);
-} R$ ${i.price}%0A`; total+=i.price});
- msg += `%0ATotal: R$ ${total.toFixed(2)}`;
+ if(!current) return;
+ let msg=`Quero comprar:%0A- ${current.name} R$ ${current.price}`;
  window.open(`https://wa.me/556191081245?text=${msg}`);
 }
 
-updateCart();
-// Abrir modal ao clicar no card (exceto botão)
-document.querySelectorAll('.card').forEach(card=>{
-  card.addEventListener('click',(e)=>{
-    if(e.target.closest('.add-btn')) return;
-    const name = card.querySelector('h3')?.innerText || '';
-    const desc = card.querySelector('p')?.innerText || '';
-    let priceText = card.querySelector('.price')?.innerText || '0';
-    let price = parseFloat(priceText.replace(/[^\d,\.]/g,'').replace(',','.')) || 0;
-    openModal(name, desc, price);
-  });
-});
-</script><div class="modal" id="modal">
-<div class="modal-content">
-<h2 id="modalTitle"></h2>
-<p id="modalDesc"></p>
-<div id="modalPrice"></div>
-<button class="add-btn" onclick="addFromModal()">Adicionar ao carrinho</button>
-<button class="buy-now" onclick="buyNow()">Comprar agora</button>
-<div class="close" onclick="closeModal()">Fechar</div>
-</div>
-</div></body>
+update();
+</script></body>
 </html>
